@@ -23,9 +23,21 @@ const menu = [
   },
 ];
 
+const style = {
+  wrapper: `fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50`,
+  content: `relative bg-white rounded-lg p-4 max-w-4xl w-full mx-4`,
+  logoContainer: `flex items-center gap-3`,
+  logoImage: `w-10 h-10`,
+  demoButton: `bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full ml-4 text-sm font-medium`,
+  videoModal: `fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50`,
+  videoContainer: `relative bg-white rounded-lg p-4 max-w-4xl w-full mx-4`,
+  closeButton: `absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer`,
+}
+
 const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const address = useCurrentAccount();
 
@@ -74,7 +86,15 @@ const Header = () => {
         className="border-b flex flex-wrap"
       >
         <Box className="flex flex-col items-center">
-          <Heading className="flex items-center gap-3">WalrusX</Heading>
+          <Heading className="flex items-center gap-3">
+            WalrusX
+            <button
+              onClick={() => setIsVideoOpen(true)}
+              className={style.demoButton}
+            >
+              功能演示
+            </button>
+          </Heading>
         </Box>
 
         <Box className="flex gap-5 items-center">
@@ -232,6 +252,27 @@ const Header = () => {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
+
+      {isVideoOpen && (
+        <div className={style.videoModal}>
+          <div className={style.videoContainer}>
+            <button
+              onClick={() => setIsVideoOpen(false)}
+              className={style.closeButton}
+            >
+              ✕
+            </button>
+            <video
+              controls
+              autoPlay
+              className="w-full rounded-lg"
+            >
+              <source src="https://aggregator.walrus-testnet.walrus.space/v1/Zgw5-ectwkh0ClGO1AkwcYSj6683T9rlUuQO9WWqPBk" type="video/mp4" />
+              您的浏览器不支持视频播放。
+            </video>
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
