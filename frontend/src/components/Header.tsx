@@ -43,7 +43,7 @@ const Header = () => {
     return profileDynamicFieldObject;
   }, [profileDynamicFieldObject]);
 
-  const { fields, ipfsUrl, image_blob_id } = useMemo(() => {
+  const { fields, ipfsUrl } = useMemo(() => {
     const fields = profile?.data?.content?.dataType === "moveObject"
       ? (profile.data.content.fields as any)
       : undefined;

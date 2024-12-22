@@ -103,6 +103,7 @@ export function PostDetailDashboard() {
         commentsTableId={commentsTableId!}
         xPassNFTs={[]}
         defaultShowComments={true}
+        owner={tweetContent.owner}
       />
     </div>
   );
